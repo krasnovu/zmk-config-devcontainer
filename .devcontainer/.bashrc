@@ -5,8 +5,9 @@ Color_Off='\033[0m'       # Text Reset
 Green='\033[0;32m'        # Green
 
 # add your boards' functions here
-build-test(){
-    base-build nrfmicro_13 test-board
+build-dao(){
+    base-build dao_left arm
+    base-build dao_right arm
 }
 
 build-nrfmicro-reset(){
@@ -22,8 +23,9 @@ base-build() ( # use a subshell
         -s app \
         -d build \
         -b $1 \
-        -- -DZMK_CONFIG=$WORKPACE_PATH/config \
-        -DSHIELD=$2 # build
+        -- -DZMK_CONFIG=$WORKPACE_PATH/config 
+        #\
+        #-DSHIELD=$2 # build
     FW_FILE="$WORKPACE_PATH/$BUILD_SUBFOLDER/$2_$1-zmk.uf2"
     rm -rf $FW_FILE # remove the FW file from the target folder
     mkdir -p $WORKPACE_PATH/$BUILD_SUBFOLDER
